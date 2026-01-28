@@ -28,14 +28,17 @@
 УСТАНОВКА И ЗАПУСК
 
 1. Клонировать проект
+
 git clone <repo_url>
 cd holiday_project
 
 2. Создать виртуальное окружение
+
 python3 -m venv venv
 source venv/bin/activate
 
 3. Установить зависимости
+
 pip install fastapi uvicorn requests beautifulsoup4 lxml rapidfuzz
 
 Запуск сайта
@@ -53,3 +56,12 @@ http://127.0.0.1:8000
 ![Поиск по названию](screens/name.png)
 
 ![Описание](screens/disc.png)
+
+## 🐳 Запуск через Docker
+
+1. Установить Docker Desktop: https://www.docker.com/products/docker-desktop/
+2. Запустить Docker Desktop
+3. В корне проекта выполнить:
+
+```bash
+docker compose up --build

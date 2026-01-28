@@ -14,7 +14,6 @@ def extract_description_from_calend(url: str) -> str:
     r.raise_for_status()
     soup = BeautifulSoup(r.text, "lxml")
 
-    # основной контент статьи
     content = soup.find("div", {"id": "article"})
     if not content:
         content = soup.find("div", class_="content")
@@ -22,7 +21,6 @@ def extract_description_from_calend(url: str) -> str:
     if not content:
         return ""
 
-    # берём первый нормальный абзац
     for p in content.find_all("p"):
         text = p.get_text(" ", strip=True)
         if text and len(text) > 80:
@@ -52,7 +50,6 @@ def main():
     conn = sqlite3.connect(DB_PATH)
     cur = conn.cursor()
 
-    # берём все mentions без description, но с holiday_url
     rows = cur.execute("""
         SELECT m.id, m.url, s.name
         FROM mentions m
@@ -90,7 +87,7 @@ def main():
         except Exception as e:
             print(f"[ERROR] {source} -> {url} :: {e}")
 
-        time.sleep(0.5)  # чтобы не спамить сайт
+        time.sleep(0.5) 
 
     print("Enriched:", done)
     conn.close()
